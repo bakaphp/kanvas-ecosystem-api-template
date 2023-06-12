@@ -38,9 +38,6 @@ class KanvasSetupCommand extends Command
 
         $commands = [
             'migrate',
-            'migrate --path database/migrations/Inventory/ --database inventory',
-            'migrate --path database/migrations/Social/ --database social',
-            'migrate --path database/migrations/Guild/ --database crm',
             'db:seed',
             'kanvas:create-role Admin',
             'kanvas:create-role Users',
