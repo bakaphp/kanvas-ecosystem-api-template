@@ -23,9 +23,6 @@ class HealthProvider extends ServiceProvider
     {
         Health::checks([
            DatabaseCheck::new()->name('ecosystem'),
-           DatabaseCheck::new()->name('inventory')->connectionName('inventory'),
-           DatabaseCheck::new()->name('social')->connectionName('social'),
-           DatabaseCheck::new()->name('crm')->connectionName('crm'),
            RedisCheck::new()->name('redis'),
            RedisMemoryUsageCheck::new()->failWhenAboveMb(1000),
            QueueCheck::new(),
