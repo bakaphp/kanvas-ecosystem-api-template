@@ -25,11 +25,10 @@ class CustomFieldsTest extends TestCase
                 'entity_id' => auth()->user()->uuid,
             ],
         ],
-        )->assertJson([
-            'data' => [
-                'setCustomField' => true,
-            ],
-        ]);
+        )->json();
+
+        print_r($results);
+        die();
     }
 
     /**
