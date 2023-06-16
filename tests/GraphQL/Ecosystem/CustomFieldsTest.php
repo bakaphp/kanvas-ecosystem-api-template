@@ -28,7 +28,7 @@ class CustomFieldsTest extends TestCase
         )->json();
 
 
-        print_r("RESPONSE: " . $results);
+        print_r($results);
         die();
     }
 
