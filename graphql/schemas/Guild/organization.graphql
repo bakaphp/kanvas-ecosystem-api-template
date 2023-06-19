@@ -1,8 +1,0 @@
-type Organization {
-    id: Int!
-    uuid: String!
-    company: Company! @belongsTo
-    user: User! @belongsTo
-    name: String!
-    address: String!
-}

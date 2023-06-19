@@ -44,55 +44,6 @@ class DeleteCompaniesAction
             $companies->softDelete();
         });
 
-        //Guild
-        DB::transaction(function () use ($companies) {
-            DB::connection('crm')->transaction(function () use ($companies) {
-                $leads = Lead::fromCompany($companies)->get();
-
-                foreach ($leads as $lead) {
-                    $lead->softDelete();
-                    /**
-                     * @todo soft delete all relationships
-                     */
-                }
-
-                $customers = People::fromCompany($companies)->get();
-
-                foreach ($customers as $customer) {
-                    $customer->softDelete();
-                    /**
-                     * @todo soft delete all relationships
-                     */
-                }
-            });
-        });
-
-        //inventory
-        DB::transaction(function () use ($companies) {
-            DB::connection('inventory')->transaction(function () use ($companies) {
-                Attributes::fromCompany($companies)->delete();
-                Categories::fromCompany($companies)->delete();
-
-                $products = Products::fromCompany($companies)->get();
-
-                foreach ($products as $product) {
-                    $product->categories()->detach();
-                    $product->warehouses()->detach();
-                    $product->attributes()->detach();
-                    $product->variants()->delete();
-                    $product->productsTypes()->delete();
-
-                    $product->delete();
-                }
-
-                Regions::fromCompany($companies)->delete();
-
-                Warehouses::fromCompany($companies)->delete();
-            });
-        });
-
-        //social
-
         return true;
     }
 }
